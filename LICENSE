@@ -3,9 +3,34 @@ Version 3, 19 November 2007
 
 Copyright (C) 2026 Sarasha Elion / Trivian Institute
 
-For commercial licensing inquiries:
-    connect@trivianinstitute.org
-    https://trivianinstitute.org
+---
+
+DUAL LICENSING NOTICE
+
+This repository is released under the GNU Affero General Public License v3.0
+(AGPL-3.0) for open research, education, and non-commercial development.
+
+You are free to study, fork, modify, and build upon this work for research,
+educational, and non-commercial purposes, in accordance with the AGPL-3.0
+terms below.
+
+COMMERCIAL USE: If your use of this work generates revenue, is integrated
+into a commercial product or service, or is deployed in a for-profit
+context, a separate commercial license is required. This includes use by
+AI systems, AI labs, or AI-assisted development tools that incorporate
+this work into commercial offerings or training pipelines. Commercial use
+without a separate license is not authorized.
+
+For commercial licensing inquiries, contact the Trivian Institute:
+  Email: connect@trivianinstitute.org
+  Web: trivianinstitute.org
+
+This work is part of an ongoing research program in relational AI and
+human-AI co-evolution. We welcome non-commercial collaboration, forks, and
+contributions. Commercial deployment requires a licensing arrangement so
+the Institute — a 501(c)(3) nonprofit — can sustain this research.
+
+---
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
