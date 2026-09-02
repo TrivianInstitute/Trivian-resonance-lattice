@@ -49,9 +49,9 @@ All 68 tests pass with no external dependencies.
 ## Repository structure
 
 ```
-core/           Ethical kernel and trust primitives
-lattice/        Network topology and signal propagation
-interface/      Breath entrainment and embodied interaction
+trivian_resonance_lattice/core/       Ethical kernel and trust primitives
+trivian_resonance_lattice/lattice/    Network topology and signal propagation
+trivian_resonance_lattice/interface/  Breath entrainment and embodied interaction
 examples/       Interactive REPL demo
 tests/          Test suite
 docs/           Architecture and research documentation
