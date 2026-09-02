@@ -159,8 +159,8 @@ harmonic-threshold          State transition detection (complementary)
 ## Tests
 
 ```bash
-python tests/test_field_core.py    # 36 tests
-python tests/test_lattice.py       # 32 tests
+python -m pip install -e '.[dev]'
+python -m pytest -q                # 68 tests
 ```
 
 All 68 tests pass on Python 3.10+. No external dependencies required.

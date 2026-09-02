@@ -334,24 +334,21 @@ class ResonanceLattice:
     ) -> Dict[str, Any]:
         """Synchronous wrapper for couple_async."""
         try:
-            loop = asyncio.get_event_loop()
-            if loop.is_running():
-                # In async context — caller should use couple_async directly
-                import concurrent.futures
-                with concurrent.futures.ThreadPoolExecutor() as pool:
-                    future = pool.submit(
-                        asyncio.run,
-                        self.couple_async(node_a, node_b, breath_sync, entrainment_cycles)
-                    )
-                    return future.result()
-            else:
-                return loop.run_until_complete(
-                    self.couple_async(node_a, node_b, breath_sync, entrainment_cycles)
-                )
+            asyncio.get_running_loop()
         except RuntimeError:
             return asyncio.run(
                 self.couple_async(node_a, node_b, breath_sync, entrainment_cycles)
             )
+
+        # A running loop cannot be nested. Preserve the synchronous API by
+        # executing the coroutine in a short-lived worker thread.
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor() as pool:
+            future = pool.submit(
+                asyncio.run,
+                self.couple_async(node_a, node_b, breath_sync, entrainment_cycles),
+            )
+            return future.result()
 
     # ─── Signal propagation ─────────────────────────────────────────
 

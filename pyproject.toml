@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trivian-resonance-lattice"
+version = "0.2.0"
+description = "A multi-node coherence protocol for human-AI co-evolution."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "AGPL-3.0-only"}
+dependencies = []
+
+[project.optional-dependencies]
+crypto = ["cryptography>=41"]
+dev = ["pytest>=7", "pytest-asyncio>=0.21"]
+
+[tool.setuptools.packages.find]
+include = ["trivian_resonance_lattice*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
