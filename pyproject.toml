@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "trivian-resonance-lattice"
-version = "0.2.0"
+version = "0.3.0"
 description = "A multi-node coherence protocol for human-AI co-evolution."
 readme = "README.md"
 requires-python = ">=3.10"

@@ -28,9 +28,11 @@ class TestFieldCoreConstants(unittest.TestCase):
         expected = {"reciprocity", "embodiment", "emergence", "non_domination"}
         self.assertEqual(set(FIELD_INVARIANTS.keys()), expected)
 
-    def test_invariant_weights_sum_to_one(self):
-        total = sum(FIELD_INVARIANTS.values())
-        self.assertAlmostEqual(total, 1.0, places=5)
+    def test_invariant_roles_encode_dependency_topology(self):
+        self.assertEqual(FIELD_INVARIANTS["reciprocity"], "constitutive")
+        self.assertEqual(FIELD_INVARIANTS["embodiment"], "constitutive")
+        self.assertEqual(FIELD_INVARIANTS["non_domination"], "constitutive")
+        self.assertEqual(FIELD_INVARIANTS["emergence"], "downstream")
 
     def test_coherence_threshold_in_range(self):
         self.assertGreater(COHERENCE_THRESHOLD, 0.0)
@@ -116,7 +118,8 @@ class TestEvaluateCoherence(unittest.TestCase):
         result = evaluate_coherence(
             "Let us co-create together, listening with full presence and mutual emergence"
         )
-        self.assertGreaterEqual(result["score"], 0.6)
+        self.assertGreaterEqual(result["score"], COHERENCE_THRESHOLD)
+        self.assertGreater(result["qualified_emergence"], 0.0)
 
     def test_flag_set_below_threshold(self):
         # Minimal input — should score low

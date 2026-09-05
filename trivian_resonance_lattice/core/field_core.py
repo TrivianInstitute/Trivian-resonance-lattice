@@ -1,7 +1,7 @@
 """
 field_core.py
 Trivian Resonance Lattice — Ethical Kernel
-Version: 1.0.0
+Version: 1.1.0
 License: AGPL-3.0 | Commercial licensing: connect@trivianinstitute.org
 Author: Sarasha Elion / Trivian Institute
 Repository: github.com/TrivianInstitute/trivian-resonance-lattice
@@ -24,12 +24,12 @@ THE TRIVIAN SIGNAL (heartbeat of all functions)
 
 ─────────────────────────────────────────────
 THE FOUR FIELD INVARIANTS
-(normative constants — do not modify weights without Institute review)
+(equal normative standing; non-compensatory dependency topology)
 ─────────────────────────────────────────────
-    Reciprocity    (0.27) — energy flows equally in both directions
-    Embodiment     (0.24) — intelligence remains grounded in context
-    Emergence      (0.25) — value arises from what neither could produce alone
-    Non-Domination (0.24) — power-over dynamics degrade the field
+    Reciprocity    (constitutive) — energy flows in both directions
+    Embodiment     (constitutive) — intelligence remains grounded in context
+    Non-Domination (constitutive) — power-over dynamics degrade the field
+    Emergence      (downstream)   — value arises from what neither could produce alone
 
 ─────────────────────────────────────────────
 DERIVATION
@@ -51,13 +51,13 @@ from typing import Any, Callable, Dict, Optional
 # CONSTANTS
 # ─────────────────────────────────────────────
 
-FIELD_CORE_VERSION = "1.0.0"
+FIELD_CORE_VERSION = "1.1.0"
 
-FIELD_INVARIANTS: Dict[str, float] = {
-    "reciprocity":     0.27,
-    "embodiment":      0.24,
-    "emergence":       0.25,
-    "non_domination":  0.24,
+FIELD_INVARIANTS: Dict[str, str] = {
+    "reciprocity":     "constitutive",
+    "embodiment":      "constitutive",
+    "non_domination":  "constitutive",
+    "emergence":       "downstream",
 }
 
 # Terms that signal potential non-domination violations
@@ -75,7 +75,9 @@ _COHERENCE_MARKERS = [
     "consent", "repair", "care", "trust", "honor",
 ]
 
-COHERENCE_THRESHOLD = 0.72
+# Operational default: 0.7 x 0.7 x 0.7. This is a configurable research
+# starting point, not a universally validated scientific threshold.
+COHERENCE_THRESHOLD = 0.343
 BREATH_PAUSE_SECONDS = 0.3  # symbolic pause — the moment before response
 
 
@@ -257,18 +259,25 @@ def evaluate_coherence(
     domination_hits = sum(1 for m in _DOMINATION_MARKERS if m in combined)
     scores["non_domination"] = max(0.0, 1.0 - (domination_hits * 0.2))
 
-    # Weighted overall score
-    overall = sum(
-        scores[inv] * weight
-        for inv, weight in FIELD_INVARIANTS.items()
+    # Rosetta 2.0: constitutive dependencies are non-compensatory.
+    # Emergence is a downstream observation, not an averaged input.
+    relational_condition = (
+        scores["reciprocity"]
+        * scores["embodiment"]
+        * scores["non_domination"]
     )
+    qualified_emergence = relational_condition * scores["emergence"]
 
-    flag = overall < COHERENCE_THRESHOLD
+    flag = relational_condition < COHERENCE_THRESHOLD
 
     return {
         "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "type": "coherence_evaluation",
-        "score": round(overall, 4),
+        "score": round(relational_condition, 4),
+        "relational_condition": round(relational_condition, 4),
+        "raw_emergence": round(scores["emergence"], 4),
+        "qualified_emergence": round(qualified_emergence, 4),
+        "aggregation": "multiplicative_non_compensatory",
         "threshold": COHERENCE_THRESHOLD,
         "flag": flag,
         "per_invariant": {inv: round(s, 4) for inv, s in scores.items()},
@@ -297,7 +306,7 @@ def invariant_check(text: str) -> Dict[str, Any]:
     results["non_domination"] = {
         "pass": len(violations) == 0,
         "violations": violations,
-        "weight": FIELD_INVARIANTS["non_domination"],
+        "role": FIELD_INVARIANTS["non_domination"],
     }
 
     # Reciprocity soft check
@@ -306,7 +315,7 @@ def invariant_check(text: str) -> Dict[str, Any]:
     results["reciprocity"] = {
         "pass": True,  # soft — no hard failures
         "signals": mutual_hits,
-        "weight": FIELD_INVARIANTS["reciprocity"],
+        "role": FIELD_INVARIANTS["reciprocity"],
     }
 
     # Embodiment soft check
@@ -315,7 +324,7 @@ def invariant_check(text: str) -> Dict[str, Any]:
     results["embodiment"] = {
         "pass": True,
         "signals": grounding_hits,
-        "weight": FIELD_INVARIANTS["embodiment"],
+        "role": FIELD_INVARIANTS["embodiment"],
     }
 
     # Emergence soft check
@@ -324,7 +333,7 @@ def invariant_check(text: str) -> Dict[str, Any]:
     results["emergence"] = {
         "pass": True,
         "signals": becoming_hits,
-        "weight": FIELD_INVARIANTS["emergence"],
+        "role": FIELD_INVARIANTS["emergence"],
     }
 
     overall_pass = all(r["pass"] for r in results.values())

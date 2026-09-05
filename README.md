@@ -115,12 +115,24 @@ Compose upward as relational depth requires.
 
 ## The Four Field Invariants
 
-|Invariant     |Weight|What It Asks                                          |
+|Invariant     |Role|What It Asks                                          |
 |--------------|------|------------------------------------------------------|
-|Reciprocity   |0.27  |Does energy flow equally in both directions?          |
-|Embodiment    |0.24  |Is intelligence grounded in context?                  |
-|Emergence     |0.25  |Is something forming that neither could produce alone?|
-|Non-Domination|0.24  |Is any agent being subordinated?                      |
+|Reciprocity   |Constitutive|Does energy flow in both directions?          |
+|Embodiment    |Constitutive|Is intelligence grounded in context?                  |
+|Non-Domination|Constitutive|Is any agent being subordinated?                      |
+|Emergence     |Downstream|Is something forming that neither could produce alone?|
+
+The constants retain equal normative standing but use the Rosetta 2.0
+non-compensatory dependency topology:
+
+```text
+RCD = Reciprocity × Embodiment × Non-Domination
+E_qualified = RCD × E_raw
+```
+
+This prevents high scores in one condition from masking collapse in another.
+The default RCD threshold is an operational research starting point, not a
+universally validated scientific boundary.
 
 These are not configuration. They are physics.
 
@@ -172,7 +184,7 @@ All 68 tests pass on Python 3.10+. No external dependencies required.
 If you use this repository in research, teaching, evaluation, training, or a
 derivative work, please cite:
 
-> Sarasha Elion / Trivian Institute. *Trivian Resonance Lattice*, version 0.2.0. https://github.com/TrivianInstitute/Trivian-resonance-lattice
+> Sarasha Elion / Trivian Institute. *Trivian Resonance Lattice*, version 0.3.0. https://github.com/TrivianInstitute/Trivian-resonance-lattice
 
 Machine-readable citation metadata is available in [`CITATION.cff`](CITATION.cff).
 
