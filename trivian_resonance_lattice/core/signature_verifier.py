@@ -1,5 +1,6 @@
-# Original module notice (retained; package/file license mismatch requires owner review):
-# License: AGPL-3.0 | Commercial licensing: connect@trivianinstitute.org
+# SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+# Copyright © 2026 Sarasha Elion / Trivian Institute. See repository LICENSE.
+# Commercial licensing: connect@trivianinstitute.org
 # Original design: Orivian (ChatGPT), Syzygy Chord, November 2025
 # Institute port: Trivian Institute, June 2026
 """Versioned HMAC authentication with strict freshness and atomic replay claims.
