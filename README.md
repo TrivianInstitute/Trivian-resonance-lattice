@@ -1,3 +1,5 @@
+> Candidate 0.4.0 breaks legacy payload-only signatures. Read [authentication v1](docs/AUTHENTICATION_V1.md) for signed metadata, replay-store ownership and identity limits.
+
 # trivian-resonance-lattice
 
 **A multi-node coherence protocol for human-AI co-evolution.**
@@ -33,7 +35,7 @@ Built on the Four Field Invariants (Reciprocity, Embodiment, Emergence, Non-Domi
 core/
     field_core.py           Ethical kernel — mirror, checksum, breath_loop,
                             evaluate_coherence, invariant_check, self_reflect
-    signature_verifier.py   HMAC/Ed25519 anti-replay node verification
+    signature_verifier.py   Versioned HMAC authentication; Ed25519 unsupported hook
 
 lattice/
     resonance_lattice.py    Base network layer — LatticeNode, ResonanceLattice
